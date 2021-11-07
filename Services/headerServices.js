@@ -4,6 +4,7 @@ const Bloggers = require('../models/bloggers');
 const headerServices = {
     getBloggerNames : (cb) =>
     {
+        // console.log('IN SERVICES');
         Bloggers.find({}, (err, response) => {
             if(err)
             {
@@ -12,6 +13,7 @@ const headerServices = {
             }
             else {
                 cb(null, response);
+                console.log(response);
             }
         }
         )

@@ -6,13 +6,14 @@ const headerController =
     getBloggers: (req, res) => {
         headerServices.getBloggerNames((err, response) =>
         {
+            // console.log("In CONTROLLER");
             if(err){
                 res.status(500).json({
                 message: "Something went wrong"
                 });
             } else{
                 res.status(200).json({
-                    message: response//"Something went wrong"
+                    message: response
                     });
             }
         });
