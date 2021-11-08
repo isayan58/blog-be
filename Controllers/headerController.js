@@ -12,9 +12,7 @@ const headerController =
                 message: "Something went wrong"
                 });
             } else{
-                res.status(200).json({
-                    message: response
-                    });
+                res.status(200).json(response);
             }
         });
     },
