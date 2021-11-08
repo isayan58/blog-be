@@ -16,6 +16,22 @@ const headerController =
             }
         });
     },
+    fetchBlogs: (req, res) =>
+    {
+        const blogger_id = req.params.blogger_id;
+        headerServices.getBlogsService(blogger_id,(err,response) =>
+        {
+            if(err)
+            {
+                res.status(500).json({
+                    message: "Something went wrong."
+            })
+            }
+            else{
+                res.status(200).json(response);
+            }
+        })
+    }
 }
 
 module.exports = headerController;

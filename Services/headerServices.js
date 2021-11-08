@@ -1,5 +1,6 @@
 const { response } = require("express");
 const Bloggers = require('../models/bloggers');
+const Blogs = require ('../models/blogs');
 
 const headerServices = {
     getBloggerNames : (cb) =>
@@ -18,6 +19,20 @@ const headerServices = {
         }
         )
     },
+    getBlogsService : (req, cb) =>
+    {
+        Blogs.find({blogger_id: req}, (err, response) =>
+        {
+            if(err)
+            {
+                cb(err, null);
+                return;
+            }
+            else{
+                cb(null, response);
+            }
+        });
+    }
 }
 
 module.exports = headerServices;
