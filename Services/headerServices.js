@@ -32,7 +32,38 @@ const headerServices = {
                 cb(null, response);
             }
         });
-    }
+    },
+    getBloggerDetails: (req, cb) =>
+    {
+        Bloggers.findOne({
+            blogger_id: req
+        }, (err, response)=>
+        {
+            if(err)
+            {
+                cb(err, null);
+                return;
+            }
+            else{
+                cb(null, response);
+            }
+        });
+    },
+    getBlogService:(req, cb) =>
+    {
+        Blogs.findOne({
+            title: req
+        }, (err, response)=>
+        {
+            if(err)
+            {
+                cb(err, null);
+            }
+            else{
+                cb(null, response);
+            }
+        });
+    },
 }
 
 module.exports = headerServices;
