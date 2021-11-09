@@ -75,7 +75,7 @@ const headerServices = {
             else{
                 cb(null, res);
             }
-        });
+        }).sort({date_posted: -1});
     }
 }
 
