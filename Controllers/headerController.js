@@ -65,7 +65,22 @@ const headerController =
                 res.status(200).json(response);
             }
         });
-    }
+    },
+    getAllBlogs: (req, res) =>
+    {
+        headerServices.getAllBlogsServices((err, response)=>
+        {
+            if(err)
+            {
+                res.status(500).json({
+                    message: "Something went wrong"
+                });
+            }
+            else{
+                res.status(200).json(response);
+            }
+        });
+    },
 }
 
 module.exports = headerController;

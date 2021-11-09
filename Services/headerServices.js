@@ -64,6 +64,19 @@ const headerServices = {
             }
         });
     },
+    getAllBlogsServices: (cb) =>
+    {
+        Blogs.find({}, (err, res)=>
+        {
+            if(err)
+            {
+                cb(err, null);
+            }
+            else{
+                cb(null, res);
+            }
+        });
+    }
 }
 
 module.exports = headerServices;

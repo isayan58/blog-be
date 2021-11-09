@@ -7,6 +7,7 @@ const headerRoutes = {
         app.get("/blogs/:blogger_id", headerController.fetchBlogs);
         app.get("/blogger/:blogger_id", headerController.getBlogger);
         app.get("/blogcontent/:title", headerController.getBlogContent);
+        app.get("/AllBlogs", headerController.getAllBlogs);
     }
 }
 
