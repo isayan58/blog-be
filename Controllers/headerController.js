@@ -81,6 +81,50 @@ const headerController =
             }
         });
     },
+    postBlogs: (req, res) =>
+    {
+        const {
+            blogger_id,
+            title,
+            header_image,
+            content,
+            tags,
+            date_posted
+        } = req.body;
+        if(blogger_id <1 || title.length === 0 || header_image.length === 0
+            || content.length === 0 || tags.length === 0 || date_posted.length === 0)
+            {
+                res.status(400).json({
+                    message: "Invalid input."
+                });
+            }
+        // else{
+        //     res.status(200).json({
+        //         message: "OK"
+        //     });
+        // }
+
+        // console.log("blogger_id:",blogger_id);
+        // console.log("title:",title);
+        // console.log("header_image:",header_image);
+        // console.log("content:",content);
+        // console.log("tags:",tags);
+        // console.log("date_posted:",date_posted);
+        headerServices.postBlogsService(req.body, (err, response)=>
+        {
+            if(err)
+            {
+                res.status(500).json({
+                    message: "Internal Server error."
+                })
+            }
+            else{
+                res.status(200).json({
+                    message: "Blog posted."
+                })
+            }
+        })
+    }
 }
 
 module.exports = headerController;

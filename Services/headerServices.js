@@ -76,6 +76,37 @@ const headerServices = {
                 cb(null, res);
             }
         }).sort({date_posted: -1});
+    },
+    postBlogsService: (requestBody, cb)=>
+    {
+        const {
+            blogger_id,
+            title,
+            header_image,
+            content,
+            tags,
+            date_posted
+        } = requestBody;
+        const blog = new Blogs({
+            blogger_id,
+            title,
+            header_image,
+            content,
+            tags,
+            date_posted
+        })
+        blog
+        .save()
+        .then((response)=>
+        {
+            console.log(response);
+            cb(null, response)
+        })
+        .catch((err) =>
+        {
+            console.log(err);
+            cb(err, null)
+        })
     }
 }
 
