@@ -1,6 +1,7 @@
 const { response } = require("express");
 const Bloggers = require('../models/bloggers');
 const Blogs = require ('../models/blogs');
+const bcrypt = require("bcrypt");
 
 const headerServices = {
     getBloggerNames : (cb) =>
@@ -107,6 +108,13 @@ const headerServices = {
             console.log(err);
             cb(err, null)
         })
+    },
+    postUserServices: (requestBody, cb) =>
+    {
+        //Salting the password to encrypt it.
+        //Finding the latest User ID
+        //Incerement user ID
+        //Save new User
     }
 }
 

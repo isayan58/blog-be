@@ -1,6 +1,7 @@
 const axios = require("axios");
 const { response } = require("express");
 const headerServices = require("../Services/headerServices");
+const bcrypt = require("bcrypt");
 
 const headerController =
 {
@@ -124,7 +125,33 @@ const headerController =
                 })
             }
         })
-    }
+    },
+    postUsers: (req, res) =>
+    {
+        console.log(req.body);
+        const
+        {
+            firstName,
+            lastName,
+            email,
+            phoneNumber,
+            password
+        } = req.body;
+        headerServices.postUserServices(req.body, (err, res) =>
+        {
+            if(err)
+            {
+                res.status(500).json({
+                    message: "Internal Server Error. User not created."
+                })
+            }
+            else{
+                res.status(200).json({
+                    message: "User Created."
+                })
+            }
+        })
+    },
 }
 
 module.exports = headerController;
