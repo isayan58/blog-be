@@ -2,6 +2,7 @@ const { response } = require("express");
 const Bloggers = require('../models/bloggers');
 const Blogs = require ('../models/blogs');
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const headerServices = {
     getBloggerNames : (cb) =>
@@ -80,21 +81,31 @@ const headerServices = {
     },
     postBlogsService: (requestBody, cb)=>
     {
+        // console.log("REQ Service:", requestBody.body);
         const {
-            blogger_id,
             title,
             header_image,
             content,
             tags,
-            date_posted
+            date_posted,
+            authToken
         } = requestBody;
+        const decodedToken = jwt.decode(authToken);
+        Bloggers.findOne({_id: decodedToken.id}, (err, res) =>
+        {
+        if(err)
+        {
+            cb(err, null);
+        }
+        else{
+        const blogger_id = res.blogger_id;
         const blog = new Blogs({
             blogger_id,
             title,
             header_image,
             content,
             tags,
-            date_posted
+            date_posted,
         })
         blog
         .save()
@@ -107,7 +118,7 @@ const headerServices = {
         {
             console.log(err);
             cb(err, null)
-        })
+        })}});
     },
     postUserServices: async (requestBody, cb) =>
     {

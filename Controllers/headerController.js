@@ -85,15 +85,18 @@ const headerController =
     },
     postBlogs: (req, res) =>
     {
+        // console.log("REQ Control:", req.body);
         const {
-            blogger_id,
             title,
             header_image,
             content,
             tags,
-            date_posted
+            date_posted,
+            authToken
         } = req.body;
-        if(blogger_id <1 || title.length === 0 || header_image.length === 0
+        // const decodedToken = jwt.decode(authToken);
+        // console.log(decodedToken.id);
+        if(title.length === 0 || header_image.length === 0
             || content.length === 0 || tags.length === 0 || date_posted.length === 0)
             {
                 res.status(400).json({
