@@ -150,6 +150,7 @@ const headerServices = {
                         date_sign_up
                     }
                 );
+                //Save new User
                 blogger.save()
                 .then((response) =>
                 {
@@ -163,8 +164,28 @@ const headerServices = {
         }).sort({blogger_id: -1});
         //blogger_id = (parseInt(blogger_id) + 1);
         //console.log("Updated:",blogger_id_1);
-        //Save new User
-    }
+    },
+    authenticateUserServices: (requestBody, cb) =>
+    {
+        const {email, password} = requestBody.body;
+        Bloggers.findOne({email:email}, async (err, response) =>
+        {
+            if(err){
+                cb(err, null)
+            }
+            else{
+                const result = await bcrypt.compare(password, response.password);
+                // cb(null, response)
+                if(result)
+                {
+                    cb(null, response);
+                }
+                else{
+                    cb({status: 500, message: "Wrong password"}, null);
+                }
+            }
+        })
+    },
 }
 
 module.exports = headerServices;

@@ -10,6 +10,7 @@ const headerRoutes = {
         app.get("/AllBlogs", headerController.getAllBlogs);
         app.post("/postBlog", headerController.postBlogs);
         app.post("/postUsers", headerController.postUsers);
+        app.post("/authenticateUser", headerController.authenticateUsers);
     }
 }
 

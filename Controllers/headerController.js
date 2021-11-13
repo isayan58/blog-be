@@ -2,6 +2,7 @@ const axios = require("axios");
 const { response } = require("express");
 const headerServices = require("../Services/headerServices");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const headerController =
 {
@@ -153,6 +154,30 @@ const headerController =
                 })
             }
         })
+    },
+    authenticateUsers: (req, res) =>
+    {
+        const { email, password } = req.body;
+        headerServices.authenticateUserServices(req, (err, response) =>
+        {
+            if(err)
+            {
+                res.status(err.status).json(err.message);
+            }
+            else
+            {
+                const authToken = jwt.sign({id:response._id}, process.env.secret,
+                    {
+                        expiresIn: "20 days",
+                    });
+                res.status(200).json({
+                    message: "Logged in.",
+                    token: authToken,
+                    firstName: response.firstName,
+                    lastName: response.lastName
+                })
+            }
+        });
     },
 }
 
