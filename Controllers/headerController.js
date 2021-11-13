@@ -128,16 +128,18 @@ const headerController =
     },
     postUsers: (req, res) =>
     {
-        console.log(req.body);
+        //console.log(req.body);
         const
         {
             firstName,
             lastName,
             email,
+            header_image,
             phoneNumber,
-            password
+            password,
+            date_sign_up
         } = req.body;
-        headerServices.postUserServices(req.body, (err, res) =>
+        headerServices.postUserServices(req.body, (err, response) =>
         {
             if(err)
             {
