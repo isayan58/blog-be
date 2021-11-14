@@ -182,6 +182,23 @@ const headerController =
             }
         });
     },
+    searchBlog: (req, res) =>
+    {
+        const searchText = req.params.search;
+        console.log(searchText);
+        headerServices.searchBlogServices(searchText, (err, response)=>
+        {
+            if(err)
+            {
+                res.status(500).json({
+                    message: "Internal Server Error."
+                })
+            }
+            else{
+                res.status(200).json(response)
+            }
+        })
+    },
 }
 
 module.exports = headerController;

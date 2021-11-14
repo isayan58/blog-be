@@ -11,6 +11,7 @@ const headerRoutes = {
         app.post("/postBlog", headerController.postBlogs);
         app.post("/postUsers", headerController.postUsers);
         app.post("/authenticateUser", headerController.authenticateUsers);
+        app.get("/search/:search", headerController.searchBlog);
     }
 }
 

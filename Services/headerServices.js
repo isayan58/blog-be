@@ -197,6 +197,32 @@ const headerServices = {
             }
         })
     },
+    searchBlogServices: (requestParam, cb) =>
+    {  //need to modify the code for proper searching
+        console.log(requestParam);
+        Bloggers.find({firstName: requestParam}, (err, response)=>
+        {
+            if(err)
+            {
+                cb(err, null)
+            }
+            else{
+                // cb(null, response)
+                // console.log(response);
+                Blogs.find({blogger_id: response[0].blogger_id}, (err, res)=>
+                {
+                    if(err)
+                    {
+                        cb(err, null)
+                    }
+                    else
+                    {
+                        cb(null, res)
+                    }
+                })
+            }
+        })
+    },
 }
 
 module.exports = headerServices;
