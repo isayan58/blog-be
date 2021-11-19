@@ -12,6 +12,7 @@ const headerRoutes = {
         app.post("/postUsers", headerController.postUsers);
         app.post("/authenticateUser", headerController.authenticateUsers);
         app.get("/search/:search", headerController.searchBlog);
+        app.patch("/update_password", headerController.updatePassword);
     }
 }
 

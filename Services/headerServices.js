@@ -223,6 +223,33 @@ const headerServices = {
             }
         })
     },
+    updatePasswordServices: async(requestBody, cb) =>
+    {
+        const {email, password} = requestBody;
+        //Salting the password to encrypt it.
+        const salt= await bcrypt.genSalt(10);
+        const encryptedPwd = await bcrypt.hash(password, salt);
+        Bloggers.findOne({email: email},
+            async (err, res)=>
+            {
+                if(err)
+                {
+                    cb(err, null)
+                }
+                else{
+                    Bloggers.updateOne(
+                        {email: email},
+                        {
+                            $set:{
+                                password: encryptedPwd
+                            }
+                        }
+                    );
+                    //const decodedPwd = jwt.decode(encryptedPwd);
+                    cb(null, res);
+                }
+            })
+    },
 }
 
 module.exports = headerServices;

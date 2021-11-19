@@ -199,6 +199,25 @@ const headerController =
             }
         })
     },
+    updatePassword: (req, res) =>
+    {
+        const {email, password} = req.body;
+        // console.log("Email: ", email);
+        // console.log("Password: ", password);
+        headerServices.updatePasswordServices(req.body, (err, response)=>
+        {
+            if(err)
+            {
+                res.status(500).json({
+                    message: "Internal Server Error"
+            })
+            }
+            else{
+                res.status(200).json(
+                    {message:"Password Changed."})
+            }
+        })
+    },
 }
 
 module.exports = headerController;
