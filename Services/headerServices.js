@@ -199,17 +199,20 @@ const headerServices = {
     },
     searchBlogServices: (requestParam, cb) =>
     {  //need to modify the code for proper searching
-        console.log(requestParam);
-        Bloggers.find({firstName: requestParam}, (err, response)=>
-        {
-            if(err)
-            {
-                cb(err, null)
-            }
-            else{
-                // cb(null, response)
-                // console.log(response);
-                Blogs.find({blogger_id: response[0].blogger_id}, (err, res)=>
+        //const searchtext='/'+requestParam+'/';
+        console.log("Services:",requestParam);
+        // Bloggers.find({firstName:{ $regex: requestParam, $options: 'i' }}, (err, response)=>
+        // {
+        //     if(err)
+        //     {
+        //         cb(err, null)
+        //     }
+        //     else{
+        //         // cb(null, response)
+        //         // console.log(response);
+
+                Blogs.find({content: { $regex: requestParam, $options: 'i' },
+                    title: { $regex: requestParam, $options: 'i' }}, (err, res)=>
                 {
                     if(err)
                     {
@@ -220,9 +223,10 @@ const headerServices = {
                         cb(null, res)
                     }
                 })
-            }
-        })
-    },
+                //cb(null, res);
+            },
+    //     })
+    // },
     updatePasswordServices: async(requestBody, cb) =>
     {
         const {email, password} = requestBody;
