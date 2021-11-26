@@ -94,8 +94,7 @@ const headerController =
             date_posted,
             authToken
         } = req.body;
-        // const decodedToken = jwt.decode(authToken);
-        // console.log(decodedToken.id);
+        
         if(title.length === 0 || header_image.length === 0
             || content.length === 0 || tags.length === 0 || date_posted.length === 0)
             {
@@ -103,18 +102,6 @@ const headerController =
                     message: "Invalid input."
                 });
             }
-        // else{
-        //     res.status(200).json({
-        //         message: "OK"
-        //     });
-        // }
-
-        // console.log("blogger_id:",blogger_id);
-        // console.log("title:",title);
-        // console.log("header_image:",header_image);
-        // console.log("content:",content);
-        // console.log("tags:",tags);
-        // console.log("date_posted:",date_posted);
         headerServices.postBlogsService(req.body, (err, response)=>
         {
             if(err)
